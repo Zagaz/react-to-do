@@ -22,8 +22,6 @@ function App() {
     setContactList([...contactList,contact])
   }
 
-
-
   return (
     <>
     <h1>My contact list</h1>
