@@ -23,9 +23,7 @@ function App() {
   }, [contactList]);
 
   function clearStorage(){
-    localStorage.clear();
     setContactList([]);
-  
   }
 
   //Inputs
@@ -85,8 +83,13 @@ function App() {
 
       <div>
       <button onClick={addContact}><RiUserAddLine /> Add Contact</button>
-      <ContactList contactList={contactList} />
       <button onClick={clearStorage}> <VscClearAll /> Clear All</button>
+      </div>
+      <div>
+        <h2>Contacts:</h2>
+        <hr />
+        <ContactList contactList={contactList} />
+        <hr />
       </div>
     </div>
   );
