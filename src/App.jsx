@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
 import ContactList from './Components/ContactList'
+import { FiAlertTriangle } from "react-icons/fi";
 import './App.css'
 
 function App() {
@@ -21,7 +22,7 @@ function App() {
 
   function addContact() {
     if (contact.name === "" || contact.email === "") {
-      alert("Please fill all fields")
+      alert(`⚠️ Please fill all fields`)
       return
     }
     setContactList([...contactList, contact])
