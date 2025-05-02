@@ -92,7 +92,7 @@ function App() {
       {
   contactList.length > 0 ? (
     <>
-      <h2> <VscListSelection /> List:</h2>
+      <h3> <VscListSelection /> List:</h3>
       <ContactList contactList={contactList} />
     </>
   ) : (
