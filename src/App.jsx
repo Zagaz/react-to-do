@@ -1,89 +1,95 @@
-import React from 'react'
-import { useState , useRef } from 'react'
-import ContactList from './Components/ContactList'
-import Contact from './Components/Contact'
-import { FiAlertTriangle } from "react-icons/fi";
-
-import './App.css'
+import React, { useState, useRef, useEffect } from 'react';
+import ContactList from './Components/ContactList';
+import { VscClearAll } from "react-icons/vsc";
+import { RiUserAddLine } from "react-icons/ri";
+import './App.css';
 
 function App() {
-  const [contact, setContact] = useState({
-    name: "",
-    email: ""
-  })
-  const [contactList, setContactList] = useState([]);
-  const inputName = useRef()
-  const inputEmail = useRef()
+  const [contact, setContact] = useState({ name: '', email: '' });
 
+  const inputName = useRef();
+  const inputEmail = useRef();
+
+  // Save in Localstorage
+
+  const [contactList, setContactList] = useState(() => {
+    const saved = localStorage.getItem('contactList');
+    return saved ? JSON.parse(saved) : [];
+  });
+
+
+  useEffect(() => {
+    localStorage.setItem('contactList', JSON.stringify(contactList));
+  }, [contactList]);
+
+  function clearStorage(){
+    localStorage.clear();
+    setContactList([]);
   
-
-
-  function defineName(e) {
-
-    setContact({ ...contact, name: e.target.value })
   }
-  function defineEmail(e) {
-    setContact({ ...contact, email: e.target.value })
+
+  //Inputs
+
+  function handleChange(e) {
+    setContact({ ...contact, [e.target.name]: e.target.value });
   }
+
+  // Add Contact and validation
 
   function addContact() {
-    // Validations
-    if (contact.name === "" || contact.email === "") {
-      alert(`⚠️ Please fill all fields`)
-      return
-    }
-    // Find
-    let duplicity = contactList.find(
-      (ct)=> ct.email === contact.email && ct.name === contact.name
-    )
-    if (typeof duplicity !== 'undefined') {
-      alert(`⚠️✉️ This email is already registered, please use another one.`)
-      inputEmail.current.value =''
-      inputEmail.current.focus()
-      return
-
+    if (!contact.name || !contact.email) {
+      alert('⚠️ Please fill all fields');
+      return;
     }
 
-    setContactList([...contactList, contact])
-    setContact({ name: "", email: "" })
-    inputName.current.focus()
-    
+    const duplicity = contactList.find(c => c.email === contact.email);
+    if (duplicity) {
+      alert('⚠️✉️ This email is already registered.');
+      setContact({ ...contact, email: '' });
+      inputEmail.current.focus();
+      return;
+    }
+
+    setContactList([...contactList, contact]);
+    setContact({ name: '', email: '' });
+    inputName.current.focus();
+  }
+// UX optimization
+  function handleKeyPress(e) {
+    if (e.key === 'Enter') addContact();
   }
 
-  function addContactEnter(e){
-    if (e.code === 'Enter'){
-      addContact() 
-    }
-    
-  }
 
   return (
-    <>
+    <div>
       <h1>My contact list</h1>
-      <hr />
-      <div>
-        <div>
-          <label>Name</label> <br />
-          <input ref={inputName} type="text" placeholder="John Doe" onChange={defineName} value={contact.name} />
-        </div>
-        <br />
-        <div>
-          <br />
-          <label>Email</label>
-          <input ref={inputEmail} type='text' placeholder='jdoe@xpto.com' onChange={defineEmail} onKeyUp={addContactEnter} value={contact.email} />
-        </div>
-        <button onClick={addContact}>Add</button>
-        <hr />
+      <label>Name:</label><br />
+      <input
+        name="name"
+        type="text"
+        ref={inputName}
+        value={contact.name}
+        onChange={handleChange}
+      />
+      <br /><br />
+      <label>Email:</label><br />
+      <input
+        name="email"
+        type="text"
+        ref={inputEmail}
+        value={contact.email}
+        onChange={handleChange}
+        onKeyUp={handleKeyPress}
+      />
+      <br /><br />
 
-
-      </div>
       <div>
-        {
-          <ContactList contactList={contactList} />
-        }
+      <button onClick={addContact}><RiUserAddLine /> Add Contact</button>
+      <ContactList contactList={contactList} />
+      <button onClick={clearStorage}> <VscClearAll /> Clear All</button>
       </div>
-    </>
-  )
+    </div>
+  );
 }
 
-export default App
+export default App;
