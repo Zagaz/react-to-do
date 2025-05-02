@@ -50,6 +50,13 @@ function App() {
     
   }
 
+  function addContactEnter(e){
+    if (e.code === 'Enter'){
+      addContact() 
+    }
+    
+  }
+
   return (
     <>
       <h1>My contact list</h1>
@@ -63,7 +70,7 @@ function App() {
         <div>
           <br />
           <label>Email</label>
-          <input ref={inputEmail} type='text' placeholder='jdoe@xpto.com' onChange={defineEmail} value={contact.email} />
+          <input ref={inputEmail} type='text' placeholder='jdoe@xpto.com' onChange={defineEmail} onKeyUp={addContactEnter} value={contact.email} />
         </div>
         <button onClick={addContact}>Add</button>
         <hr />
