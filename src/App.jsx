@@ -12,6 +12,10 @@ function App() {
     email: ""
   })
   const [contactList, setContactList] = useState([]);
+  const inputName = useRef()
+  const inputEmail = useRef()
+
+  
 
 
   function defineName(e) {
@@ -29,8 +33,7 @@ function App() {
     }
     setContactList([...contactList, contact])
     setContact({ name: "", email: "" })
-
-    console.table(contact)
+    inputName.current.focus()
   }
 
   return (
@@ -40,13 +43,13 @@ function App() {
       <div>
         <div>
           <label>Name</label> <br />
-          <input type="text" placeholder="John Doe" onChange={defineName} value={contact.name} />
+          <input ref={inputName} type="text" placeholder="John Doe" onChange={defineName} value={contact.name} />
         </div>
         <br />
         <div>
           <br />
           <label>Email</label>
-          <input type='text' placeholder='jdoe@xpto.com' onChange={defineEmail} value={contact.email} />
+          <input ref={inputEmail} type='text' placeholder='jdoe@xpto.com' onChange={defineEmail} value={contact.email} />
         </div>
         <button onClick={addContact}>Add</button>
         <hr />
