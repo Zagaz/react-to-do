@@ -1,7 +1,9 @@
 import React from 'react'
 import { useState } from 'react'
 import ContactList from './Components/ContactList'
+import Contact from './Components/Contact'
 import { FiAlertTriangle } from "react-icons/fi";
+
 import './App.css'
 
 function App() {
@@ -51,8 +53,16 @@ function App() {
 
       </div>
       <div>
+        <ul>
+        {
+          contactList.map((contact,index)=>{
+            return<Contact key={index} name={contact.name} email={contact.email} />
+          })
+        }
+
+        </ul>
   
-      <ContactList contactList={contactList} />
+      
    
     
       </div>
