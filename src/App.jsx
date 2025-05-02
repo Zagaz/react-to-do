@@ -12,6 +12,7 @@ function App() {
 
 
   function defineName(e) {
+   
     setContact({ ...contact, name: e.target.value })
   }
   function defineEmail(e) {
@@ -19,6 +20,10 @@ function App() {
   }
 
   function addContact() {
+    if (contact.name === "" || contact.email === "") {
+      alert("Please fill all fields")
+      return
+    }
     setContactList([...contactList, contact])
 
     console.table(contact)
