@@ -2,6 +2,8 @@ import React, { useState, useRef, useEffect } from 'react';
 import ContactList from './Components/ContactList';
 import { VscClearAll } from "react-icons/vsc";
 import { RiUserAddLine } from "react-icons/ri";
+import { LuTriangleAlert } from "react-icons/lu";
+import { VscListSelection } from "react-icons/vsc";
 import './App.css';
 
 function App() {
@@ -86,10 +88,20 @@ function App() {
       <button onClick={clearStorage}> <VscClearAll /> Clear All</button>
       </div>
       <div>
-        <h2>Contacts:</h2>
-        <hr />
-        <ContactList contactList={contactList} />
-        <hr />
+        
+      {
+  contactList.length > 0 ? (
+    <>
+      <h2> <VscListSelection /> List:</h2>
+      <ContactList contactList={contactList} />
+    </>
+  ) : (
+    <h3><LuTriangleAlert /> No contacts on the list.</h3>
+  )
+}
+
+
+       
       </div>
     </div>
   );
