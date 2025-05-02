@@ -59,7 +59,20 @@ function App() {
     if (e.key === 'Enter') addContact();
   }
 
-  // 
+  // Remove
+
+  function deleteByEmail(mail){
+    console.log(mail)
+    setContactList(contactList.filter(c => c.email !== mail));
+  }
+
+  function editByEmail(email) {
+    const found = contactList.find(contact => contact.email === email);
+    if (found) {
+      setContact(found);
+      inputName.current.focus();
+    }
+  }
 
 
   return (
@@ -95,7 +108,7 @@ function App() {
   contactList.length > 0 ? (
     <>
       <h3> <VscListSelection /> List:</h3>
-      <ContactList contactList={contactList} />
+      <ContactList contactList={contactList} delete = {  deleteByEmail }/>
     </>
   ) : (
     <h3><LuTriangleAlert /> No contacts on the list.</h3>

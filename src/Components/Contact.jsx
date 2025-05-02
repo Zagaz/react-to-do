@@ -1,14 +1,12 @@
-import React from 'react'
+import React from 'react';
 
-const Contact = ({index, id, name, email, remove}) => {
-   
+const Contact = ({ index, id, name, email, delete }) => {
   return (
-    <div  id = {id} className='contact-list-item' key ={index}  >
-        {`|name: ${name} | email: ${email} | EDIT | DELETE`}
-        
-      <button onClick={remove}>Remove</button>
+    <div id={id} className='contact-list-item' key={index}>
+      {`| name: ${name} | email: ${email} | EDIT | DELETE `}
+      <button onClick={delete}>Remove</button>
     </div>
-  )
-}
+  );
+};
 
-export default Contact
+export default Contact;
