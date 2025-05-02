@@ -2,7 +2,7 @@ import React from 'react'
 
 const ButtonSimple = ({value='Click'}) => {
   return (
-    <button>{value}</button>
+    <button onClick={onClick}>{value}</button>
   )
 }
 
