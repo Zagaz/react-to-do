@@ -27,13 +27,27 @@ function App() {
   }
 
   function addContact() {
+    // Validations
     if (contact.name === "" || contact.email === "") {
       alert(`⚠️ Please fill all fields`)
       return
     }
+    // Find
+    let duplicity = contactList.find(
+      (ct)=> ct.email === contact.email && ct.name === contact.name
+    )
+    if (typeof duplicity !== 'undefined') {
+      alert(`⚠️✉️ This email is already registered, please use another one.`)
+      inputEmail.current.value =''
+      inputEmail.current.focus()
+      return
+
+    }
+
     setContactList([...contactList, contact])
     setContact({ name: "", email: "" })
     inputName.current.focus()
+    
   }
 
   return (
