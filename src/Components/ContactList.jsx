@@ -6,15 +6,16 @@ function removeContact(){
 }
 
 const ContactList = ({ contactList }) => {
-    let idContact= Math.random();
+ 
 
     return (
         <>
             <div className='contact-list-wrapper'>
                 {
                     contactList.map((contact, index) => {
+                        let idNew =  'ct-'+ index;
                         return (
-                            <Contact key={index} id={idContact} name={contact.name} email={contact.email}  remove = {
+                            <Contact key={index} id={idNew} name={contact.name} email={contact.email}  remove = {
                                 removeContact 
                             }/>
                         )
