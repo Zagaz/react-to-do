@@ -7,7 +7,8 @@ import { VscListSelection } from "react-icons/vsc";
 import './App.css';
 
 function App() {
-  const [contact, setContact] = useState({ name: '', email: '' });
+  const [contact, setContact] = useState({ name: '', email: ''  });
+  const [addBt, setAddBt] = useState(true);
 
   const inputName = useRef();
   const inputEmail = useRef();
@@ -66,8 +67,8 @@ function App() {
     setContactList(contactList.filter(c => c.email !== mail));
   }
 
-  function editByEmail(email) {
-    const found = contactList.find(contact => contact.email === email);
+  function editByEmail(mail) {
+    const found = contactList.find(contact => contact.email === mail);
     if (found) {
       setContact(found);
       inputName.current.focus();
@@ -99,7 +100,11 @@ function App() {
       <br /><br />
 
       <div>
-      <button onClick={addContact}><RiUserAddLine /> Add Contact</button>
+      <button onClick={addContact}><RiUserAddLine /> 
+
+      Add Contact
+      
+      </button>
       <button onClick={clearStorage}> <VscClearAll /> Clear All</button>
       </div>
       <div>
@@ -108,7 +113,7 @@ function App() {
   contactList.length > 0 ? (
     <>
       <h3> <VscListSelection /> List:</h3>
-      <ContactList contactList={contactList} remove = {  deleteByEmail }/>
+      <ContactList contactList={contactList} remove = {  deleteByEmail } edit = { editByEmail }/>
     </>
   ) : (
     <h3><LuTriangleAlert /> No contacts on the list.</h3>

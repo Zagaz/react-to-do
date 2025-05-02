@@ -1,7 +1,7 @@
 import React from 'react';
 import Contact from './Contact';
 
-const ContactList = ({ contactList , remove }) => {
+const ContactList = ({ contactList , remove , edit }) => {
   return (
     <div className='contact-list-wrapper'>
       {contactList.map((contact, index) => (
@@ -11,6 +11,7 @@ const ContactList = ({ contactList , remove }) => {
           name={contact.name}
           email={contact.email}
           remove ={() => remove (contact.email)}
+          edit ={() => edit (contact.email)}
         />
       ))}
     </div>
