@@ -15,7 +15,7 @@ function App() {
 
 
   function defineName(e) {
-   
+
     setContact({ ...contact, name: e.target.value })
   }
   function defineEmail(e) {
@@ -49,25 +49,14 @@ function App() {
         </div>
         <button onClick={addContact}>Add</button>
         <hr />
-      
+
 
       </div>
       <div>
-        <ul>
         {
-          contactList.map((contact,index)=>{
-            return<Contact key={index} name={contact.name} email={contact.email} />
-          })
+          <ContactList contactList={contactList} />
         }
-
-        </ul>
-  
-      
-   
-    
       </div>
-
-
     </>
   )
 }

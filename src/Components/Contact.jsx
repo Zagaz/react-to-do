@@ -1,10 +1,10 @@
 import React from 'react'
 
-const Contact = ({key, name, email}) => {
+const Contact = ({index, name, email}) => {
    
   return (
-    <li key ={key} >
-        {`name: ${name} | email: ${email}`}
+    <li key ={index}  >
+        {`|name: ${name} | email: ${email}`}
     </li>
   )
 }
