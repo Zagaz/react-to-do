@@ -4,15 +4,17 @@ import Contact from './Contact'
 const ContactList = ({ contactList }) => {
     return (
         <>
-            <ul>
+            <div className='contact-list-wrapper'>
                 {
                     contactList.map((contact, index) => {
                         return (
-                            <Contact key={index} id= {`contact-${index}`} name={contact.name} email={contact.email} />
+                            <Contact key={index} id={`contact-${index}`} name={contact.name} email={contact.email} />
                         )
                     })
                 }
-            </ul>
+
+            </div>
+
 
         </>
     )

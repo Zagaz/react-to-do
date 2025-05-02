@@ -3,9 +3,9 @@ import React from 'react'
 const Contact = ({index, name, email}) => {
    
   return (
-    <li key ={index}  >
+    <div className='contact-list-item' key ={index}  >
         {`|name: ${name} | email: ${email}`}
-    </li>
+    </div>
   )
 }
 

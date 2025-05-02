@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState } from 'react'
+import { useState , useRef } from 'react'
 import ContactList from './Components/ContactList'
 import Contact from './Components/Contact'
 import { FiAlertTriangle } from "react-icons/fi";
@@ -28,6 +28,7 @@ function App() {
       return
     }
     setContactList([...contactList, contact])
+    setContact({ name: "", email: "" })
 
     console.table(contact)
   }
