@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState } from 'react'
-import ButtonSimple from './Components/ButtonSimple.jsx'
+import ContactList from './Components/ContactList'
 import './App.css'
 
 function App() {
@@ -40,12 +40,15 @@ function App() {
           <input type='text' placeholder='jdoe@xpto.com' onChange={defineEmail} value={contact.email} />
         </div>
         <button onClick={addContact}>Add</button>
+        <hr />
+      
 
       </div>
       <div>
-        {/* List */}
+  
+      <ContactList contactList={contactList} />
    
-
+    
       </div>
 
 
