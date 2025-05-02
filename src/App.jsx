@@ -108,7 +108,7 @@ function App() {
   contactList.length > 0 ? (
     <>
       <h3> <VscListSelection /> List:</h3>
-      <ContactList contactList={contactList} delete = {  deleteByEmail }/>
+      <ContactList contactList={contactList} remove = {  deleteByEmail }/>
     </>
   ) : (
     <h3><LuTriangleAlert /> No contacts on the list.</h3>
