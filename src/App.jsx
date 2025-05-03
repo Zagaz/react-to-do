@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import ContactList from './Components/ContactList';
-
+import './App.css'
 import { VscClearAll } from "react-icons/vsc";
 import { RiUserAddLine } from "react-icons/ri";
 import { LuTriangleAlert } from "react-icons/lu";
@@ -87,35 +87,70 @@ function App() {
   }
 
   return (
-    <div className=''>
-      <h1 className='text-center'>My contact list</h1>
-      <label>Name:</label><br />
-      <input
-        name="name"
-        type="text"
-        ref={inputName}
-        value={contact.name}
-        onChange={handleChange}
-      />
-      <br /><br />
-      <label>Email:</label><br />
-      <input
-        name="email"
-        type="text"
-        ref={inputEmail}
-        value={contact.email}
-        onChange={handleChange}
-        onKeyUp={handleKeyPress}
-      />
-      <br /><br />
+    <div>
+      {/* Header */}
+      <div className='container-fluid title'>
+        <div className="row">
+          <div className="col text-center">
+            <h4 className='text-center'>CONTACT LIST</h4>
+          </div>
 
-      <div>
-        <button onClick={addContact}>
-          <RiUserAddLine /> {contact.id ? "Update Contact" : "Add Contact"}
-        </button>
-        <button onClick={clearStorage}>
-          <VscClearAll /> Clear All
-        </button>
+        </div>
+      </div>
+
+
+      <div className='container-fluid form'>
+        <div className="row">
+          <div className="col p-3 text-center">
+            <div className="row justify-content-center">
+              <div className="col-6 ">
+
+                <div className='mb-3'>
+
+                  <label className='form-label'>Name:</label><br />
+                  <input
+                    className='form-control'
+                    name="name"
+                    type="text"
+                    ref={inputName}
+                    value={contact.name}
+                    onChange={handleChange}
+                  />
+                  <br />
+                  <label className='form-label'>Email:</label><br />
+                  <input
+                   className='form-control'
+                    name="email"
+                    type="text"
+                    ref={inputEmail}
+                    value={contact.email}
+                    onChange={handleChange}
+                    onKeyUp={handleKeyPress}
+                  />
+
+
+                </div>
+
+              </div>
+            </div>
+
+      
+
+            <div>
+              <button onClick={addContact}>
+                <RiUserAddLine /> {contact.id ? "Update Contact" : "Add Contact"}
+              </button>
+              <button onClick={clearStorage}>
+                <VscClearAll /> Clear All
+              </button>
+            </div>
+
+          </div>
+
+        </div>
+
+
+
       </div>
 
       <div>
@@ -132,6 +167,7 @@ function App() {
           <h3><LuTriangleAlert /> No contacts on the list.</h3>
         )}
       </div>
+
     </div>
   );
 }
