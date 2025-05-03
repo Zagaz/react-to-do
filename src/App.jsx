@@ -1,17 +1,12 @@
 import React, { useState, useRef, useEffect } from 'react';
 import ContactList from './Components/ContactList';
-import './App.css'
-import { VscClearAll } from "react-icons/vsc";
-import { RiUserAddLine } from "react-icons/ri";
-import { LuTriangleAlert } from "react-icons/lu";
-import { VscListSelection } from "react-icons/vsc";
-import { RiContactsBook3Line } from "react-icons/ri";
-import { GrUpdate } from "react-icons/gr";
-
 import './App.css';
+import { VscClearAll, VscListSelection } from "react-icons/vsc";
+import { RiUserAddLine, RiContactsBook3Line } from "react-icons/ri";
+import { GrUpdate } from "react-icons/gr";
+import { LuTriangleAlert } from "react-icons/lu";
 
 function App() {
-  // Holds the current contact being edited or added
   const [contact, setContact] = useState({ name: '', email: '', id: '' });
   const [contactList, setContactList] = useState(() => {
     const saved = localStorage.getItem('contactList');
@@ -21,37 +16,57 @@ function App() {
   const inputName = useRef();
   const inputEmail = useRef();
 
-  // Save contact list to local storage whenever it changes
   useEffect(() => {
     localStorage.setItem('contactList', JSON.stringify(contactList));
   }, [contactList]);
 
-  // Clear all contacts
   function clearStorage() {
     setContactList([]);
   }
 
-  // Handle input changes
   function handleChange(e) {
     setContact({ ...contact, [e.target.name]: e.target.value });
   }
 
-  // Add or update contact
   function addContact() {
+    const nameRegex = /^[A-Za-zÀ-ÖØ-öø-ÿ\s]+$/;
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
     if (!contact.name || !contact.email) {
       alert('⚠️ Please fill all fields');
       return;
     }
 
+    if (!nameRegex.test(contact.name)) {
+      alert('⚠️ Name must contain letters only');
+      inputName.current.focus();
+      return;
+    }
+
+    if (!emailRegex.test(contact.email)) {
+      alert('⚠️ Invalid email format');
+      inputEmail.current.focus();
+      return;
+    }
+
+    const formattedName = contact.name
+      .toLowerCase()
+      .replace(/\b\w/g, l => l.toUpperCase());
+    const formattedEmail = contact.email.toLowerCase();
+
+    const newContactData = {
+      ...contact,
+      name: formattedName,
+      email: formattedEmail
+    };
+
     if (contact.id) {
-      // If contact has an ID, update the existing contact
       const updatedList = contactList.map(c =>
-        c.id === contact.id ? { ...contact } : c
+        c.id === contact.id ? { ...newContactData } : c
       );
       setContactList(updatedList);
     } else {
-      // If no ID, it's a new contact
-      const duplicity = contactList.find(c => c.email === contact.email);
+      const duplicity = contactList.find(c => c.email === formattedEmail);
       if (duplicity) {
         alert('⚠️✉️ This email is already registered.');
         setContact({ ...contact, email: '' });
@@ -59,22 +74,21 @@ function App() {
         return;
       }
 
-      // Add new contact with generated ID
-      const newContact = { ...contact, id: Date.now().toString() };
+      const newContact = {
+        ...newContactData,
+        id: Date.now().toString()
+      };
       setContactList([...contactList, newContact]);
     }
 
-    // Reset form
     setContact({ name: '', email: '', id: '' });
     inputName.current.focus();
   }
 
-  // Handle Enter key to submit
   function handleKeyPress(e) {
     if (e.key === 'Enter') addContact();
   }
 
-  // Load contact into form for editing
   function editByEmail(id) {
     const found = contactList.find(contact => contact.id === id);
     if (found) {
@@ -83,31 +97,26 @@ function App() {
     }
   }
 
-  // Delete contact by index
   function deleteById(i) {
     setContactList(contactList.filter((_, index) => index !== i));
   }
 
   return (
     <div>
-      {/* Header */}
       <div className='container-fluid title'>
         <div className="row">
           <div className="col text-center">
             <h4 className='text-center'><RiContactsBook3Line /> CONTACT LIST</h4>
           </div>
-
         </div>
       </div>
-
 
       <div className='container-fluid form'>
         <div className="row">
           <div className="col p-3 text-center">
             <div className="row justify-content-center">
-              <div className="col-10 col-sm-8 col-md-6 col-lg-4  ">
+              <div className="col-10 col-sm-8 col-md-6 col-lg-4">
                 <div className='mb-3'>
-
                   <label className='form-label'>Name:</label><br />
                   <input
                     className='form-control'
@@ -129,24 +138,22 @@ function App() {
                     onKeyUp={handleKeyPress}
                   />
                   <div className='row mt-4'>
-                    <div className="col text-start ">
+                    <div className="col text-start">
                       <button className='btn btn-outline-warning' onClick={clearStorage}>
                         <VscClearAll /> Clear All
                       </button>
                     </div>
                     <div className="col text-end">
                       <button className='btn btn-outline-info' onClick={addContact}>
-                        {contact.id ?
+                        {contact.id ? (
                           <>
-                            <GrUpdate />
-                            Update
+                            <GrUpdate /> Update
                           </>
-                          :
+                        ) : (
                           <>
-                            <RiUserAddLine />
-                            Add
+                            <RiUserAddLine /> Add
                           </>
-                        }
+                        )}
                       </button>
                     </div>
                   </div>
@@ -171,7 +178,6 @@ function App() {
           <h3><LuTriangleAlert /> No contacts on the list.</h3>
         )}
       </div>
-
     </div>
   );
 }
