@@ -12,6 +12,7 @@ function App() {
     const saved = localStorage.getItem('contactList');
     return saved ? JSON.parse(saved) : [];
   });
+  const [alert, setAlert] = useState({ type: '', message: '' });
 
   const inputName = useRef();
   const inputEmail = useRef();
@@ -20,8 +21,20 @@ function App() {
     localStorage.setItem('contactList', JSON.stringify(contactList));
   }, [contactList]);
 
+  useEffect(() => {
+    if (alert.message) {
+      const timer = setTimeout(() => setAlert({ type: '', message: '' }), 4000);
+      return () => clearTimeout(timer);
+    }
+  }, [alert]);
+
+  function showAlert(type, message) {
+    setAlert({ type, message });
+  }
+
   function clearStorage() {
     setContactList([]);
+    showAlert('warning', 'All contacts have been cleared.');
   }
 
   function handleChange(e) {
@@ -33,18 +46,18 @@ function App() {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     if (!contact.name || !contact.email) {
-      alert('⚠️ Please fill all fields');
+      showAlert('danger', 'Please fill all fields.');
       return;
     }
 
     if (!nameRegex.test(contact.name)) {
-      alert('⚠️ Name must contain letters only');
+      showAlert('danger', 'Name must contain letters only.');
       inputName.current.focus();
       return;
     }
 
     if (!emailRegex.test(contact.email)) {
-      alert('⚠️ Invalid email format');
+      showAlert('danger', 'Invalid email format.');
       inputEmail.current.focus();
       return;
     }
@@ -65,10 +78,11 @@ function App() {
         c.id === contact.id ? { ...newContactData } : c
       );
       setContactList(updatedList);
+      showAlert('success', 'Contact updated successfully.');
     } else {
       const duplicity = contactList.find(c => c.email === formattedEmail);
       if (duplicity) {
-        alert('⚠️✉️ This email is already registered.');
+        showAlert('warning', 'This email is already registered.');
         setContact({ ...contact, email: '' });
         inputEmail.current.focus();
         return;
@@ -79,6 +93,7 @@ function App() {
         id: Date.now().toString()
       };
       setContactList([...contactList, newContact]);
+      showAlert('success', 'Contact added successfully.');
     }
 
     setContact({ name: '', email: '', id: '' });
@@ -98,7 +113,9 @@ function App() {
   }
 
   function deleteById(i) {
+    const deleted = contactList[i];
     setContactList(contactList.filter((_, index) => index !== i));
+    showAlert('info', `Contact "${deleted.name}" removed.`);
   }
 
   return (
@@ -106,10 +123,16 @@ function App() {
       <div className='container-fluid title'>
         <div className="row">
           <div className="col text-center">
-            <h4 className='text-center'><RiContactsBook3Line /> CONTACT LIST</h4>
+            <h4><RiContactsBook3Line /> CONTACT LIST</h4>
           </div>
         </div>
       </div>
+
+      {alert.message && (
+        <div className={`alert alert-${alert.type} text-center`} role="alert">
+          {alert.message}
+        </div>
+      )}
 
       <div className='container-fluid form'>
         <div className="row">
