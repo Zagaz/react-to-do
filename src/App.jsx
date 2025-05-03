@@ -202,7 +202,7 @@ function App() {
             />
           </>
         ) : (
-          <h3 className='text-center text-white' ><LuTriangleAlert /> No contacts on the list.</h3>
+          <h4 className='text-center text-white p-3' ><LuTriangleAlert /> No contacts on the list.</h4>
         )}
       </div>
     </div>
