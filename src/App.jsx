@@ -5,6 +5,8 @@ import { VscClearAll } from "react-icons/vsc";
 import { RiUserAddLine } from "react-icons/ri";
 import { LuTriangleAlert } from "react-icons/lu";
 import { VscListSelection } from "react-icons/vsc";
+import { RiContactsBook3Line } from "react-icons/ri";
+import { GrUpdate } from "react-icons/gr";
 
 import './App.css';
 
@@ -92,7 +94,7 @@ function App() {
       <div className='container-fluid title'>
         <div className="row">
           <div className="col text-center">
-            <h4 className='text-center'>CONTACT LIST</h4>
+            <h4 className='text-center'><RiContactsBook3Line /> CONTACT LIST</h4>
           </div>
 
         </div>
@@ -134,7 +136,17 @@ function App() {
                     </div>
                     <div className="col text-end">
                       <button className='btn btn-outline-info' onClick={addContact}>
-                        <RiUserAddLine /> {contact.id ? "Update Contact" : "Add Contact"}
+                        {contact.id ?
+                          <>
+                            <GrUpdate />
+                            Update
+                          </>
+                          :
+                          <>
+                            <RiUserAddLine />
+                            Add
+                          </>
+                        }
                       </button>
                     </div>
                   </div>
