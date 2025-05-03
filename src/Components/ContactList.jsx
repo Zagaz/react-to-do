@@ -1,5 +1,7 @@
 import React from 'react';
 import Contact from './Contact';
+import './ContactList.css'
+
 
 const ContactList = ({ contactList , remove , edit }) => {
    
