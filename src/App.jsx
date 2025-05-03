@@ -45,8 +45,6 @@ function App() {
   function addContact() {
     // Full name validation (Also includes middle names, and signs like: ' and -).
     const nameRegex = /^[a-z]+(?:['’-][a-z]+)*(?:\s+[a-z]+(?:['’-][a-z]+)*)*$/i;
-
-
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     if (!contact.name || !contact.email) {
