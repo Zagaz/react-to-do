@@ -144,7 +144,7 @@ function App() {
             <div className="row justify-content-center">
               <div className="col-10 col-sm-8 col-md-6 col-lg-4">
                 <div className='mb-3'>
-                  <label className='form-label'>Name:</label><br />
+                  <label className='form-label'>Name</label><br />
                   <input
                     className='form-control'
                     name="name"
@@ -154,7 +154,7 @@ function App() {
                     onChange={handleChange}
                   />
                   <br />
-                  <label className='form-label'>Email:</label><br />
+                  <label className='form-label'>Email</label><br />
                   <input
                     className='form-control'
                     name="email"
