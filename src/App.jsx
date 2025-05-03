@@ -103,8 +103,7 @@ function App() {
         <div className="row">
           <div className="col p-3 text-center">
             <div className="row justify-content-center">
-              <div className="col-6 ">
-
+              <div className="col-10 col-sm-8 col-md-6 col-lg-4  ">
                 <div className='mb-3'>
 
                   <label className='form-label'>Name:</label><br />
@@ -119,7 +118,7 @@ function App() {
                   <br />
                   <label className='form-label'>Email:</label><br />
                   <input
-                   className='form-control'
+                    className='form-control'
                     name="email"
                     type="text"
                     ref={inputEmail}
@@ -127,30 +126,23 @@ function App() {
                     onChange={handleChange}
                     onKeyUp={handleKeyPress}
                   />
-
-
+                  <div className='row mt-4'>
+                    <div className="col text-start ">
+                      <button className='btn btn-outline-warning' onClick={clearStorage}>
+                        <VscClearAll /> Clear All
+                      </button>
+                    </div>
+                    <div className="col text-end">
+                      <button className='btn btn-outline-info' onClick={addContact}>
+                        <RiUserAddLine /> {contact.id ? "Update Contact" : "Add Contact"}
+                      </button>
+                    </div>
+                  </div>
                 </div>
-
               </div>
             </div>
-
-      
-
-            <div>
-              <button onClick={addContact}>
-                <RiUserAddLine /> {contact.id ? "Update Contact" : "Add Contact"}
-              </button>
-              <button onClick={clearStorage}>
-                <VscClearAll /> Clear All
-              </button>
-            </div>
-
           </div>
-
         </div>
-
-
-
       </div>
 
       <div>
