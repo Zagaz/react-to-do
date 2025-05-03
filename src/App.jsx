@@ -98,7 +98,6 @@ function App() {
     }
 
     setContact({ name: '', email: '', id: '' });
-    inputName.current.focus();
   }
 
   function handleKeyPress(e) {
@@ -171,7 +170,7 @@ function App() {
                         // Show Clear All  button when there's at leat 1 contact on the list.
                         contactList.length > 0 &&
 
-                      <button className='btn btn-outline-warning' onClick={clearStorage}>
+                      <button className='btn btn-warning' onClick={clearStorage}>
                         <VscClearAll /> Clear All
                       </button>
 
@@ -180,7 +179,11 @@ function App() {
 
                     </div>
                     <div className="col-6 text-end">
-                      <button className='btn btn-outline-info' onClick={addContact}>
+
+
+                      <button className={`btn btn-${
+                        contact.id ? 'success' : 'primary'
+                      }`} onClick={addContact}>
                         {contact.id ? (
                           <>
                             <GrUpdate /> Update
@@ -191,6 +194,12 @@ function App() {
                           </>
                         )}
                       </button>
+                      
+
+
+                     
+
+
                     </div>
                   </div>
                 </div>
