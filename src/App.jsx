@@ -125,20 +125,15 @@ function App() {
       <div className='container-fluid title'>
         <div className="row">
           <div className="col text-center">
-            <h4><FaReact /> CONTACT LIST
-            
-            </h4>
-
+            <h4><FaReact /> CONTACT LIST</h4>
           </div>
         </div>
       </div>
-
       {alert.message && (
         <div className={`alert alert-${alert.type} text-center`} role="alert">
           {alert.message}
         </div>
       )}
-
       <div className='container-fluid form'>
         <div className="row">
           <div className="col p-3 text-center">
@@ -167,25 +162,17 @@ function App() {
                   />
                   <div className='row mt-4'>
                     <div className="col-6 text-start">
-
                       {
                         // Show Clear All  button when there's at leat 1 contact on the list.
                         contactList.length > 0 &&
-
-                      <button className='btn btn-warning' onClick={clearStorage}>
-                        <VscClearAll /> Clear All
-                      </button>
-
+                        <button className='btn btn-warning' onClick={clearStorage}>
+                          <VscClearAll /> Clear All
+                        </button>
                       }
-
-
                     </div>
                     <div className="col-6 text-end">
-
-
-                      <button className={`btn btn-${
-                        contact.id ? 'success' : 'primary'
-                      }`} onClick={addContact}>
+                      <button className={`btn btn-${contact.id ? 'success' : 'primary'
+                        }`} onClick={addContact}>
                         {contact.id ? (
                           <>
                             <GrUpdate /> Update
@@ -196,12 +183,6 @@ function App() {
                           </>
                         )}
                       </button>
-                      
-
-
-                     
-
-
                     </div>
                   </div>
                 </div>
@@ -210,11 +191,21 @@ function App() {
           </div>
         </div>
       </div>
-
       <div>
         {contactList.length > 0 ? (
           <>
-            <h3><VscListSelection /> List:</h3>
+          <div className='container-fluid'>
+
+          
+            <div className="row list">
+              <div className="col">
+
+            <h3 className=' container  text-white p-3'><VscListSelection /> List:</h3>
+              </div>
+            </div>
+
+          </div>
+
             <ContactList
               contactList={contactList}
               remove={deleteById}
@@ -222,7 +213,7 @@ function App() {
             />
           </>
         ) : (
-          <h4 className='text-center text-white p-3' ><LuTriangleAlert  className='text-warning'/> No contacts on the list.</h4>
+          <h4 className='text-center text-white p-3' ><LuTriangleAlert className='text-warning' /> Your contact list is empty.</h4>
         )}
       </div>
     </div>
