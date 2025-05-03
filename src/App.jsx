@@ -1,9 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react';
 import ContactList from './Components/ContactList';
+
 import { VscClearAll } from "react-icons/vsc";
 import { RiUserAddLine } from "react-icons/ri";
 import { LuTriangleAlert } from "react-icons/lu";
 import { VscListSelection } from "react-icons/vsc";
+
 import './App.css';
 
 function App() {
@@ -85,8 +87,8 @@ function App() {
   }
 
   return (
-    <div>
-      <h1>My contact list</h1>
+    <div className=''>
+      <h1 className='text-center'>My contact list</h1>
       <label>Name:</label><br />
       <input
         name="name"
