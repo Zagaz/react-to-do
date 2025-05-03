@@ -7,7 +7,7 @@ import { VscListSelection } from "react-icons/vsc";
 import './App.css';
 
 function App() {
-  const [contact, setContact] = useState({ name: '', email: ''  });
+  const [contact, setContact] = useState({ name: '', email: '' , id : '' });
   const [addBt, setAddBt] = useState(true);
 
   const inputName = useRef();
@@ -38,6 +38,7 @@ function App() {
   // Add Contact and validation
 
   function addContact() {
+   
     if (!contact.name || !contact.email) {
       alert('⚠️ Please fill all fields');
       return;
@@ -63,18 +64,26 @@ function App() {
   // Remove
 
   function deleteByEmail(mail){
-    console.log(mail)
+
     setContactList(contactList.filter(c => c.email !== mail));
   }
 
-  function editByEmail(mail) {
-    const found = contactList.find(contact => contact.email === mail);
+  function editByEmail(i) {
+    const found = contactList.find(contact => contact.id=== i);
     if (found) {
       setContact(found);
       inputName.current.focus();
     }
   }
 
+  function deleteById(i){
+   
+    setContactList(contactList.filter((contact, index) => index !== i));
+   
+
+  }
+  // Id generator
+ 
 
   return (
     <div>
@@ -111,9 +120,17 @@ function App() {
         
       {
   contactList.length > 0 ? (
+
     <>
       <h3> <VscListSelection /> List:</h3>
-      <ContactList contactList={contactList} remove = {  deleteByEmail } edit = { editByEmail }/>
+
+      {
+        
+
+      }
+      <ContactList contactList={contactList} remove = {  deleteById } edit = { editByEmail } 
+       
+      />
     </>
   ) : (
     <h3><LuTriangleAlert /> No contacts on the list.</h3>
