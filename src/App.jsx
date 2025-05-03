@@ -7,83 +7,82 @@ import { VscListSelection } from "react-icons/vsc";
 import './App.css';
 
 function App() {
-  const [contact, setContact] = useState({ name: '', email: '' , id : '' });
-  const [addBt, setAddBt] = useState(true);
-
-  const inputName = useRef();
-  const inputEmail = useRef();
-
-  // Save in Localstorage
-
+  // Holds the current contact being edited or added
+  const [contact, setContact] = useState({ name: '', email: '', id: '' });
   const [contactList, setContactList] = useState(() => {
     const saved = localStorage.getItem('contactList');
     return saved ? JSON.parse(saved) : [];
   });
 
+  const inputName = useRef();
+  const inputEmail = useRef();
 
+  // Save contact list to local storage whenever it changes
   useEffect(() => {
     localStorage.setItem('contactList', JSON.stringify(contactList));
   }, [contactList]);
 
-  function clearStorage(){
+  // Clear all contacts
+  function clearStorage() {
     setContactList([]);
   }
 
-  //Inputs
-
+  // Handle input changes
   function handleChange(e) {
     setContact({ ...contact, [e.target.name]: e.target.value });
   }
 
-  // Add Contact and validation
-
+  // Add or update contact
   function addContact() {
-   
     if (!contact.name || !contact.email) {
       alert('⚠️ Please fill all fields');
       return;
     }
 
-    const duplicity = contactList.find(c => c.email === contact.email);
-    if (duplicity) {
-      alert('⚠️✉️ This email is already registered.');
-      setContact({ ...contact, email: '' });
-      inputEmail.current.focus();
-      return;
+    if (contact.id) {
+      // If contact has an ID, update the existing contact
+      const updatedList = contactList.map(c =>
+        c.id === contact.id ? { ...contact } : c
+      );
+      setContactList(updatedList);
+    } else {
+      // If no ID, it's a new contact
+      const duplicity = contactList.find(c => c.email === contact.email);
+      if (duplicity) {
+        alert('⚠️✉️ This email is already registered.');
+        setContact({ ...contact, email: '' });
+        inputEmail.current.focus();
+        return;
+      }
+
+      // Add new contact with generated ID
+      const newContact = { ...contact, id: Date.now().toString() };
+      setContactList([...contactList, newContact]);
     }
 
-    setContactList([...contactList, contact]);
-    setContact({ name: '', email: '' });
+    // Reset form
+    setContact({ name: '', email: '', id: '' });
     inputName.current.focus();
   }
-// UX optimization
+
+  // Handle Enter key to submit
   function handleKeyPress(e) {
     if (e.key === 'Enter') addContact();
   }
 
-  // Remove
-
-  function deleteByEmail(mail){
-
-    setContactList(contactList.filter(c => c.email !== mail));
-  }
-
-  function editByEmail(i) {
-    const found = contactList.find(contact => contact.id=== i);
+  // Load contact into form for editing
+  function editByEmail(id) {
+    const found = contactList.find(contact => contact.id === id);
     if (found) {
       setContact(found);
       inputName.current.focus();
     }
   }
 
-  function deleteById(i){
-   
-    setContactList(contactList.filter((contact, index) => index !== i));
-   
-
+  // Delete contact by index
+  function deleteById(i) {
+    setContactList(contactList.filter((_, index) => index !== i));
   }
-  // Id generator
- 
 
   return (
     <div>
@@ -109,36 +108,27 @@ function App() {
       <br /><br />
 
       <div>
-      <button onClick={addContact}><RiUserAddLine /> 
-
-      Add Contact
-      
-      </button>
-      <button onClick={clearStorage}> <VscClearAll /> Clear All</button>
+        <button onClick={addContact}>
+          <RiUserAddLine /> {contact.id ? "Update Contact" : "Add Contact"}
+        </button>
+        <button onClick={clearStorage}>
+          <VscClearAll /> Clear All
+        </button>
       </div>
+
       <div>
-        
-      {
-  contactList.length > 0 ? (
-
-    <>
-      <h3> <VscListSelection /> List:</h3>
-
-      {
-        
-
-      }
-      <ContactList contactList={contactList} remove = {  deleteById } edit = { editByEmail } 
-       
-      />
-    </>
-  ) : (
-    <h3><LuTriangleAlert /> No contacts on the list.</h3>
-  )
-}
-
-
-       
+        {contactList.length > 0 ? (
+          <>
+            <h3><VscListSelection /> List:</h3>
+            <ContactList
+              contactList={contactList}
+              remove={deleteById}
+              edit={editByEmail}
+            />
+          </>
+        ) : (
+          <h3><LuTriangleAlert /> No contacts on the list.</h3>
+        )}
       </div>
     </div>
   );
