@@ -5,6 +5,7 @@ import { VscClearAll, VscListSelection } from "react-icons/vsc";
 import { RiUserAddLine, RiContactsBook3Line } from "react-icons/ri";
 import { GrUpdate } from "react-icons/gr";
 import { LuTriangleAlert } from "react-icons/lu";
+import { FaReact } from "react-icons/fa";
 
 function App() {
   const [contact, setContact] = useState({ name: '', email: '', id: '' });
@@ -123,7 +124,10 @@ function App() {
       <div className='container-fluid title'>
         <div className="row">
           <div className="col text-center">
-            <h4><RiContactsBook3Line /> CONTACT LIST</h4>
+            <h4><FaReact /> CONTACT LIST
+            
+            </h4>
+
           </div>
         </div>
       </div>
