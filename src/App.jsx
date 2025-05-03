@@ -165,12 +165,21 @@ function App() {
                     onKeyUp={handleKeyPress}
                   />
                   <div className='row mt-4'>
-                    <div className="col text-start">
+                    <div className="col-6 text-start">
+
+                      {
+                        // Show Clear All  button when there's at leat 1 contact on the list.
+                        contactList.length > 0 &&
+
                       <button className='btn btn-outline-warning' onClick={clearStorage}>
                         <VscClearAll /> Clear All
                       </button>
+
+                      }
+
+
                     </div>
-                    <div className="col text-end">
+                    <div className="col-6 text-end">
                       <button className='btn btn-outline-info' onClick={addContact}>
                         {contact.id ? (
                           <>
