@@ -25,6 +25,16 @@ A simple and responsive to-do list application built with **React**, featuring b
 - Node.js (v14 or later)
 - npm or yarn
 
+## 📸 Screenshot
+(Add a screenshot here if available)
+
+## 🤝 Contributing
+Contributions, issues and feature requests are welcome!
+Feel free to check the issues page.
+
+📄 License
+This project is licensed under the MIT License.
+
 ### Installation
 
 ```bash
