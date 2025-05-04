@@ -35,7 +35,7 @@ Feel free to check the issues page.
 ## 📄 License
 This project is licensed under the MIT License.
 
-### Installation
+## 👨‍💻 Installation
 
 ```bash
 # Clone the repository
