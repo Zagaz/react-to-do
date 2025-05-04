@@ -2,7 +2,7 @@
 
 A simple and responsive to-do list application built with **React**, featuring basic CRUD functionality. This project is ideal for learning or demonstrating core React concepts such as state management, component structure, and user interaction.
 
-![Visitor Badge](https://visitor-badge.laobi.icu/badge?page_id=Zagaz.react-to-do)
+![Badge](https://hitscounter.dev/api/hit?url=https%3A%2F%2Fgithub.com%2FZagaz%2Freact-to-do&label=React+To+Do&icon=file-earmark-code-fill&color=%230a58ca)
 
 ## 🚀 Features
 
