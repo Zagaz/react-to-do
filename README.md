@@ -32,7 +32,7 @@ A simple and responsive to-do list application built with **React**, featuring b
 Contributions, issues and feature requests are welcome!
 Feel free to check the issues page.
 
-📄 License
+## 📄 License
 This project is licensed under the MIT License.
 
 ### Installation
