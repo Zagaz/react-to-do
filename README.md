@@ -28,7 +28,7 @@ A simple and responsive to-do list application built with **React**, featuring b
 ## 📸 Screenshot
 
 
-[![link-video.png](https://i.postimg.cc/Bb03wT7X/link-video.png)](https://www.loom.com/share/55475a9bc720442b8c5950b6bd1b744c)
+[![link-video.png](https://i.ibb.co/Qv7ZTkN6/loom-react.png)](https://www.loom.com/share/55475a9bc720442b8c5950b6bd1b744c)
 
 
 ## 🤝 Contributing
