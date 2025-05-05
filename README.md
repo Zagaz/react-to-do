@@ -25,11 +25,9 @@ A simple and responsive to-do list application built with **React**, featuring b
 - Node.js (v14 or later)
 - npm or yarn
 
-## 📸 Screenshot
-
+## 🎥 Watch the video demo
 
 [![link-video.png](https://i.ibb.co/Qv7ZTkN6/loom-react.png)](https://www.loom.com/share/55475a9bc720442b8c5950b6bd1b744c)
-
 
 ## 🤝 Contributing
 Contributions, issues and feature requests are welcome!
